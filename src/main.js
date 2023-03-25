@@ -4,6 +4,7 @@ const video = document.getElementById("video");
 const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
 const handpose = require("@tensorflow-models/handpose");
+var delay = 2000;
 let isCameraOn = false;
 
 export async function setupCamera() {
@@ -51,13 +52,18 @@ export async function detectHands() {
 
     if (isCameraOn) {
       // Call the detect function again after a 2-second buffer
-      //setTimeout(() => {
+      setTimeout(() => {
         requestAnimationFrame(detect);
-      // }, 2000);
+      }, delay);
     }
   }
 
   detect();
+}
+
+export function setDelay(x) {
+  delay = x;
+  console.log(delay);
 }
 
 export async function main() {

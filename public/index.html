@@ -28,26 +28,51 @@
         width: 640px;
         height: 480px;
       }
+
+      input[type="text"] {
+        width: 120px;
+        height: 40px;
+        padding: 12px 10px;
+        margin: 8px 0;
+        box-sizing: border-box;
+        border: 2px solid #ccc;
+        border-radius: 4px;
+        background-color: #f8f8f8;
+        font-size: 11px;
+      }
     </style>
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
+
     <button id="startButton">Start Camera</button>
     <button id="stopButton" disabled>Stop Camera</button>
-    <button id="cameraSlashButton" onclick="CslashB()">Camera and Hand</button>
+    <button id="cameraSlashButton" onclick="CslashB()" disabled>Camera and Hand</button>
     <button id="handOver" onclick="CandB()">Hand Only</button>
     <button id="cameraOnly" onclick="Conly()">Camera Only</button>
+    <button id="togPoints" onclick="togKeypoints()">Toggle Keypoints</button>
+
     <div class="container">
       <video id="video" width="640" height="480" style="display: none;"></video>
       <canvas id="canvas" width="640" height="480"></canvas>
     </div>
+
     <div id="keypoints"></div>
+
     <script>
       document.addEventListener("DOMContentLoaded", () => {
         main();
-        CslashB();
       });
+
+      function togKeypoints() {
+        if (keypoints.style.display == "none") {
+          keypoints.style.display = "block";
+        } else {
+          keypoints.style.display = "none";
+        }
+      }
+
       //showing camera only and changing buttons
       function Conly() {
         handOver.disabled = false;
