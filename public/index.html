@@ -25,6 +25,8 @@
       #canvas {
         width: 50%; /* take up the other 50% of the container's width */
         border: 1px solid black;
+        width: 640px;
+        height: 480px;
       }
     </style>
   </head>
@@ -33,6 +35,9 @@
     <div id="root"></div>
     <button id="startButton">Start Camera</button>
     <button id="stopButton" disabled>Stop Camera</button>
+    <button id="cameraSlashButton" onclick="CslashB()">Camera and Hand</button>
+    <button id="handOver" onclick="CandB()">Hand Only</button>
+    <button id="cameraOnly" onclick="Conly()">Camera Only</button>
     <div class="container">
       <video id="video" width="640" height="480" style="display: none;"></video>
       <canvas id="canvas" width="640" height="480"></canvas>
@@ -41,7 +46,32 @@
     <script>
       document.addEventListener("DOMContentLoaded", () => {
         main();
+        CslashB();
       });
+      //showing camera only and changing buttons
+      function Conly() {
+        handOver.disabled = false;
+        cameraSlashButton.disabled = false;
+        video.style.display = "block";
+        canvas.style.display = "none";
+        cameraOnly.disabled = true;
+      }
+      //showing camera and canvas and changing buttons
+      function CslashB() {
+        handOver.disabled = false;
+        cameraOnly.disabled = false;
+        video.style.display = "block";
+        canvas.style.display = "block";
+        cameraSlashButton.disabled = true;
+      }
+      //showing canvas only
+      function CandB() {
+        cameraOnly.disabled = false;
+        cameraSlashButton.disabled = false;
+        canvas.style.display = "block";
+        video.style.display = "none";
+        handOver.disabled = true;
+      }
     </script>
   </body>
 </html>
