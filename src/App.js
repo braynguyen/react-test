@@ -10,7 +10,7 @@ const App = () => {
 
   const getVideo = () => {
     navigator.mediaDevices
-      .getUserMedia({ video: { width: 300 } })
+      .getUserMedia({ video: { width: "pixels" } })
       .then(stream => {
         let video = videoRef.current;
         video.srcObject = stream;
@@ -24,7 +24,6 @@ const App = () => {
   return (
     <div>
       <div>
-        <button>Take a photo</button>
         <video ref={videoRef} />
       </div>
     </div>
