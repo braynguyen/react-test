@@ -3,9 +3,10 @@ const stopButton = document.getElementById("stopButton");
 const video = document.getElementById("video");
 const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
+const handpose = require("@tensorflow-models/handpose");
 let isCameraOn = false;
 
-async function setupCamera() {
+export async function setupCamera() {
   const stream = await navigator.mediaDevices.getUserMedia({
     video: { width: 640, height: 480 },
     audio: false,
@@ -18,7 +19,7 @@ async function setupCamera() {
   });
 }
 
-async function detectHands() {
+export async function detectHands() {
   const model = await handpose.load();
   video.play();
 
@@ -50,16 +51,16 @@ async function detectHands() {
 
     if (isCameraOn) {
       // Call the detect function again after a 2-second buffer
-      setTimeout(() => {
+      //setTimeout(() => {
         requestAnimationFrame(detect);
-      }, 2000);
+      // }, 2000);
     }
   }
 
   detect();
 }
 
-async function main() {
+export async function main() {
   await setupCamera();
 
   startButton.addEventListener("click", () => {
@@ -74,8 +75,9 @@ async function main() {
     isCameraOn = false;
     startButton.disabled = false;
     stopButton.disabled = true;
-video.style.display = "none";
-});
+    video.style.display = "none";
+  });
+  
 }
 
 main();
